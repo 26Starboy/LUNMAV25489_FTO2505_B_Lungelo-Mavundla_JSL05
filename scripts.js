@@ -99,3 +99,22 @@ function updateTask() {
   updateCanban();
   closeModal();
 }
+
+// Open Add Task modal (reuse same modal or create separate modal if preferred)
+function openAddTaskModal() {
+  currentTask = null; // reset
+  closeModal(); // just in case
+
+  // Clear inputs for adding new task
+  document.getElementById("edit-task-title").value = "";
+  document.getElementById("edit-task-description").value = "";
+  document.getElementById("edit-task-status").value = "todo";
+
+  document.getElementById("task-modal").showModal();
+}
+
+// Add new task from modal inputs
+function addTask() {
+  const title = document.getElementById("edit-task-title").value.trim();
+  const description = document.getElementById("edit-task-description").value.trim();
+  const status = document.getElementById("edit-task-status").value;
