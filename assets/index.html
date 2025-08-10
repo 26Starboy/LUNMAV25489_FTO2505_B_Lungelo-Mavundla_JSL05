@@ -17,3 +17,31 @@
     <script defer src="./scripts.js"></script>
     <title>Kanban Task Management</title>
   </head>
+
+  <body>
+    <!-- Navigation Sidebar: Contains the logo, navigation links for boards, and theme toggle. -->
+    <nav class="side-bar" id="side-bar-div">
+      <div id="side-logo-div">
+        <img id="logo" src="./assets/logo-light.svg" alt="logo-light" />
+      </div>
+
+      <div class="boards-nav-links-div" id="boards-nav-links-div">
+        <h4 id="headline-sidepanel">ALL BOARDS (1)</h4>
+        <button class="board-btn">Launch Career</button>
+      </div>
+      <div class="board-toggle-div">
+        <div class="toggleswitch-div">
+          <div>☀️</div>
+          <div class="toggleswitch-btn" id="toggleswitch-btn">
+            <div
+              class="toggleswitch-btn-circle"
+              id="toggleswitch-btn-circle"
+            ></div>
+          </div>
+          <div>⚫</div>
+        </div>
+        <button class="sidebar-btn" id="sidebar-btn">
+          <span>🚫 </span> Hide Sidebar
+        </button>
+      </div>
+    </nav>
