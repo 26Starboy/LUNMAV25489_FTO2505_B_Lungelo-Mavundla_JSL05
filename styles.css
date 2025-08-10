@@ -2,7 +2,7 @@
    Global & Root Variables
 ======================== */
 * {
-  box-sizing: border-box; /* Ensures padding and border are included in total element size */
+  box-sizing: border-box;
 }
 
 :root {
@@ -10,78 +10,85 @@
   --secondary-color: #f4f7fd;
   --primary-font-color: #000000;
   --secondary-font-color: #828fa3;
-  --primary-box-shadow: 0px 4px 6px rgba(54, 78, 126, 0.1015); /* Subtle shadow for card depth */
-  --sidebar-width: 300px; /* Sidebar fixed width */
+  --primary-box-shadow: 0px 4px 6px rgba(54, 78, 126, 0.1015);
+  --sidebar-width: 300px;
+  --accent-color: #635fc7;
+  --danger-color: #ea5555;
 }
 
 /* ================
-     Base Elements
-  ================ */
+   Base Elements
+================ */
 body {
   font-family: "Plus Jakarta Sans", sans-serif;
-  display: flex; /* Allow layout to span horizontally */
+  display: flex;
   flex-direction: row;
   width: 100%;
   min-height: 100vh;
   margin: 0;
   background-color: var(--secondary-color);
-  font-size: 1rem; /* Base font size for rem scaling */
+  font-size: 1rem;
+  color: var(--primary-font-color);
 }
 
 /* ================
-     Sidebar Layout
-  ================ */
+   Sidebar Layout
+================ */
 .side-bar {
   display: flex;
   flex-direction: column;
   background-color: var(--primary-color);
-  border-right: 1px solid #e4ebfa; /* Light divider */
+  border-right: 1px solid #e4ebfa;
   width: var(--sidebar-width);
   height: 100vh;
 }
 
 #side-logo-div {
-  margin: 33px 113px 54px 34px; /* Spacing around logo */
+  margin: 33px 113px 54px 34px;
   display: flex;
   justify-content: flex-start;
 }
 
 #logo {
-  width: 100%; /* Make logo responsive within container */
+  width: 100%;
 }
 
 .boards-nav-links-div {
   display: flex;
   flex-direction: column;
-  color: var(--primary-font-color);
 }
 
 #headline-sidepanel {
-  padding: 0 12px 0 50px; /* Aligns section content from left and right */
+  padding: 0 12px 0 50px;
 }
 
 h4 {
   color: var(--secondary-font-color);
   font-size: 0.75rem;
-  letter-spacing: 0.125rem; /* Makes heading more spaced */
+  letter-spacing: 0.125rem;
 }
 
-.board-btn {
+.board-btn,
+.sidebar-btn {
   font-family: inherit;
   display: flex;
   align-items: center;
-  gap: 10px; /* Space between icon and text */
-  background-color: #635fc7;
+  gap: 10px;
+  background-color: var(--accent-color);
   color: #fff;
   border: none;
-  border-radius: 0 100px 100px 0; /* Pill shape only on right side */
+  border-radius: 0 100px 100px 0;
   height: 48px;
   width: 276px;
-  padding: 28px 12px 28px 50px;
+  padding: 0 12px 0 50px;
   font-size: 0.9375rem;
   font-weight: bold;
   cursor: pointer;
-  overflow: hidden; /* Prevents overflowed text/icons from showing */
+  overflow: hidden;
+}
+
+.sidebar-btn {
+  margin-bottom: 16px;
 }
 
 .board-toggle-div {
@@ -89,86 +96,58 @@ h4 {
   flex-direction: column;
   justify-content: space-between;
   position: absolute;
-  bottom: 0%; /* Position at the bottom of sidebar */
+  bottom: 0;
 }
 
 .toggleswitch-div {
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  background-color: #f4f7fd;
-  border: none;
+  background-color: var(--secondary-color);
   border-radius: 6px;
   height: 48px;
   width: 251px;
-  margin: 0px auto 20px 16px;
-  padding: 0px 64px 0px 64px;
-  font-size: 0.9375rem;
+  margin: 0 auto 20px 16px;
 }
 
 .toggleswitch-btn {
-  font-family: inherit;
-  display: flex;
-  align-items: center;
-  background-color: #635fc7;
+  background-color: var(--accent-color);
   border: none;
   border-radius: 12px;
   height: 20px;
   width: 40px;
-  padding: 0px 5px 0px 5px;
-  font-weight: bold;
+  padding: 0 5px;
   cursor: pointer;
 }
 
 .toggleswitch-btn-circle {
   background-color: #fff;
-  border-radius: 50%; /* Make it circular */
+  border-radius: 50%;
   height: 14px;
   width: 14px;
-  transition: all 0.3s ease; /* Smooth transition for toggle */
+  transition: all 0.3s ease;
 }
 
-.sidebar-btn {
-  font-family: inherit;
-  display: flex;
-  align-items: center;
-  gap: 10px; /* Space between icon and text */
-  background-color: #635fc7;
-  color: #fff;
-  border: none;
-  border-radius: 0 100px 100px 0; /* Pill shape only on right side */
-  height: 48px;
-  width: 276px;
-  padding: 28px 12px 28px 50px;
-  font-size: 0.9375rem;
-  font-weight: bold;
-  cursor: pointer;
-  margin-bottom: 16px;
-}
-
-/* ===============
-     Main Layout
-  ================ */
+/* ================
+   Main Layout
+================ */
 #layout {
-  flex: 1; /* Fills remaining space beside sidebar */
-  overflow-x: hidden; /* Prevent horizontal scroll */
+  flex: 1;
+  overflow-x: hidden;
   width: 100%;
 }
 
-/* ===============
-     Header Section
-  ================ */
+/* ================
+   Header
+================ */
 header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: var(--primary-color);
-  color: var(--primary-font-color);
   height: 96px;
   padding: 0 35px 0 30px;
   border-bottom: 1px solid #e4ebfa;
-  width: 100%;
   font-size: 1.875rem;
   font-weight: 600;
 }
@@ -179,47 +158,42 @@ header {
 }
 
 .logo-mobile {
-  display: none; /* Hidden on desktop; shown on smaller screens */
+  display: none;
 }
 
 .addnewtask-btn {
   font-family: inherit;
   display: flex;
   align-items: center;
-  background-color: #635fc7;
+  background-color: var(--accent-color);
   color: #fff;
   border: none;
-  border-radius: 100px; /* Pill shape button */
+  border-radius: 100px;
   height: 48px;
   width: 164px;
-  padding: 15px 25px 14px 24px;
+  padding: 15px 25px;
   font-size: 0.938rem;
   font-weight: 700;
   cursor: pointer;
-  overflow: hidden; /* Prevents overflowed text/icons from showing */
+  overflow: hidden;
 }
 
-/* ===============
-     Board Columns
-  ================ */
+/* ================
+   Board Columns
+================ */
 .container {
   display: flex;
   flex-direction: column;
   padding-left: 35px;
-  box-sizing: border-box;
 }
 
 .card-column-main {
   display: grid;
-  grid-template-columns: repeat(
-    3,
-    minmax(0, 304px)
-  ); /* 3 columns with min size */
-  gap: 8px; /* Space between columns */
+  grid-template-columns: repeat(3, minmax(0, 304px));
+  gap: 8px;
 }
 
 .column-div {
-  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -229,22 +203,19 @@ header {
 .column-head-div {
   display: flex;
   align-items: center;
-  gap: 10px; /* Space between dot and column title */
+  gap: 10px;
 }
 
 .columnHeader {
   font-size: 0.75rem;
   letter-spacing: 0.125rem;
   color: var(--secondary-font-color);
-  margin: 0;
 }
 
-/* Status Dots */
 .dot {
   height: 15px;
   width: 15px;
-  border-radius: 50%; /* Make it circular */
-  display: inline-block;
+  border-radius: 50%;
 }
 
 #todo-dot {
@@ -259,9 +230,9 @@ header {
   background-color: #219c90;
 }
 
-/* ===============
-     Task Cards
-  ================ */
+/* ================
+   Task Cards
+================ */
 .tasks-container {
   display: flex;
   flex-direction: column;
@@ -274,38 +245,20 @@ header {
   width: 100%;
   height: 60px;
   background-color: var(--primary-color);
-  color: var(--primary-font-color);
   border-radius: 12px;
   box-shadow: var(--primary-box-shadow);
-  cursor: pointer; /* Indicate it's clickable */
+  cursor: pointer;
   margin-bottom: 20px;
   font-size: 0.9375rem;
   font-weight: bold;
 }
 
-/*================
-     Edit Task Modal
-  ================ */
-
-#task-modal {
-  flex-direction: column;
-  border: 0px solid #e4ebfa;
-  border-radius: 12px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  z-index: 1000;
-  transform: translate(-50%, -50%);
-  background-color: var(--primary-color);
-  width: 479px;
-  max-width: 50%;
-  margin: 0;
-  padding-top: 0px;
-}
-
+/* ================
+   Modal
+================ */
+#task-modal,
 #task-modal1 {
   flex-direction: column;
-  border: 0px solid #e4ebfa;
   border-radius: 12px;
   position: fixed;
   top: 50%;
@@ -315,8 +268,6 @@ header {
   background-color: var(--primary-color);
   width: 479px;
   max-width: 50%;
-  margin: 0;
-  padding-top: 0px;
 }
 
 .modal-body {
@@ -325,25 +276,22 @@ header {
 }
 
 .modal-header {
-  padding: 0px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .close-btn {
-  background-color: var(--primary-color);
-  border: 0px solid var(--primary-color);
-  color: #ea5555; /* Close button color */
+  background-color: transparent;
+  border: none;
+  color: var(--danger-color);
   font-size: 1.5rem;
   width: 40px;
   cursor: pointer;
-  padding-right: 0px;
 }
 
 .Section-discription {
-  margin-bottom: 10px; /* Space below description */
-  margin-top: 0px; /* No space above description */
+  margin-bottom: 10px;
 }
 
 .task-details {
@@ -357,207 +305,101 @@ header {
   display: flex;
 }
 
-.savechanges-btn {
+.savechanges-btn,
+.createtask-btn {
   font-family: inherit;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #635fc7; /* Primary button color */
+  background-color: var(--accent-color);
   color: #fff;
   border: none;
-  border-radius: 100px; /* Pill shape button */
+  border-radius: 100px;
   height: 40px;
-  width: 164px;
-  padding: 15px 25px 14px 24px;
   font-size: 0.938rem;
   font-weight: bold;
   cursor: pointer;
 }
 
 .createtask-btn {
-  font-family: inherit;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #635fc7; /* Primary button color */
-  color: #fff;
-  border: none;
-  border-radius: 100px; /* Pill shape button */
-  height: 40px;
   width: 100%;
-  padding: 15px 25px 14px 24px;
-  font-size: 0.938rem;
-  font-weight: bold;
-  cursor: pointer;
 }
 
-#edit-task-title {
+input,
+textarea,
+select {
   padding: 10px;
   font-size: 0.8rem;
-  border: 1px solid #e4ebfa; /* Light border */
-  border-radius: 4px; /* Rounded corners */
-}
-
-#edit-task-description {
-  padding: 10px;
-  font-size: 0.8rem;
-  border: 1px solid #e4ebfa; /* Light border */
-  border-radius: 4px; /* Rounded corners */
-}
-
-#edit-task-status {
-  padding: 10px;
-  font-size: 0.8rem;
-  border: 1px solid #e4ebfa; /* Light border */
-  border-radius: 4px; /* Rounded corners */
-}
-
-#add-task-title {
-  padding: 10px;
-  font-size: 0.8rem;
-  border: 1px solid #e4ebfa; /* Light border */
-  border-radius: 4px; /* Rounded corners */
-}
-
-#add-task-description {
-  padding: 10px;
-  font-size: 0.8rem;
-  border: 1px solid #e4ebfa; /* Light border */
-  border-radius: 4px; /* Rounded corners */
-}
-
-#add-task-status {
-  padding: 10px;
-  font-size: 0.8rem;
-  border: 1px solid #e4ebfa; /* Light border */
-  border-radius: 4px; /* Rounded corners */
-}
-
-/* ===============
-     Headings
-  ================ */
-h2 {
-  font-size: 1.5rem;
-  margin: 0;
+  border: 1px solid #e4ebfa;
+  border-radius: 4px;
 }
 
 /* ========================
-     Responsive Styles
-  ======================== */
+   Responsive
+========================= */
 
 /******** Tablets ********/
 @media screen and (max-width: 1023px) {
   .side-bar {
-    display: none; /* Hide sidebar on tablets and smaller */
+    display: none;
   }
-
   .side-bar.show-sidebar {
     display: flex !important;
-    position: fixed; /* Overlay on top of page */
+    position: fixed;
     height: auto;
   }
-
   #side-logo-div {
     display: none;
   }
-
   .logo-mobile {
     display: block;
     width: 30px;
     height: 30px;
     margin-right: 10px;
   }
-
   body {
     font-size: 0.8rem;
   }
-
-  .board-btn {
-    font-size: 0.8rem;
-    padding-left: 15px;
-    margin-right: 15px;
-    font-weight: 700;
-  }
-
   .container {
     padding: 0;
-    width: 100%;
-    align-items: center; /* Center columns on smaller screens */
+    align-items: center;
   }
-
   .card-column-main {
     grid-template-columns: repeat(2, minmax(0, 360px));
-    gap: 8px;
   }
-
   header {
     height: 64px;
     padding: 0 10px 0 18px;
     border: none;
   }
-
   #header-board-name {
     font-size: 1rem;
   }
-
-  .task-div {
-    width: 100%;
-  }
-
-  .columnHeader {
-    font-size: 0.75rem;
-  }
-
   .dot {
     height: 8px;
     width: 8px;
-  }
-
-  .column-head-div {
-    gap: 8px;
-  }
-
-  .column-div {
-    width: 100%;
   }
 }
 
 /******** Mobile ********/
 @media screen and (max-width: 576px) {
   .card-column-main {
-    grid-template-columns: minmax(
-      0,
-      380px
-    ); /* Stack columns in single column */
+    grid-template-columns: minmax(0, 380px);
   }
-
   .column-div {
     padding: 24px;
   }
-
   #header-board-name {
-    display: none; /* Hide board name on mobile */
+    display: none;
   }
-
   .addnewtask-btn {
-    font-family: inherit;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #635fc7;
-    color: #fff;
-    border: none;
-    border-radius: 100px; /* Pill shape button */
     height: 33px;
     width: 33px;
-    padding: 10px 10px 12px 10px;
-    font-size: 0.938rem;
-    font-weight: 700;
-    cursor: pointer;
-    overflow: hidden; /* Prevents overflowed text/icons from showing */
+    padding: 0;
+    border-radius: 50%;
+    justify-content: center;
   }
-
   .addnewtask-btn-text {
-    display: none; /* Hidden on smallscreens; shown on desktop */
+    display: none;
   }
 }
