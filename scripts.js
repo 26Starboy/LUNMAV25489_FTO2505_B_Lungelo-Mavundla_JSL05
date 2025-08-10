@@ -2,22 +2,22 @@
  * Key used in localStorage to store tasks
  * @constant {string}
  */
-const TASKS_STORAGE_KEY = 'kanban_tasks';
+const TASKS_STORAGE_KEY = 'kanban_tasks'; // localStorage key to save/retrieve tasks
 
 /**
  * Loads tasks from localStorage or returns default tasks if none found.
  * @returns {Array<{id:number, title:string, description:string, status:string}>}
  */
 function loadTasks() {
-  const stored = localStorage.getItem(TASKS_STORAGE_KEY);
+  const stored = localStorage.getItem(TASKS_STORAGE_KEY); // get stored tasks string from localStorage
   if (stored) {
     try {
-      return JSON.parse(stored);
+      return JSON.parse(stored); // parse stored JSON string to object array
     } catch (e) {
-      console.warn('Error parsing stored tasks:', e);
+      console.warn('Error parsing stored tasks:', e); // if parse error, log warning
     }
   }
-  // Default sample tasks if none in storage
+  // If no stored tasks, return default sample tasks
   return [
     { id: 1, title: "Launch Epic Career 🚀", description: "", status: "todo" },
     { id: 2, title: "Conquer React 🧬", description: "", status: "todo" },
@@ -35,7 +35,7 @@ function loadTasks() {
  * @param {Array} tasks
  */
 function saveTasks(tasks) {
-  localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
+  localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks)); // convert tasks array to JSON string and save in localStorage
 }
 
 /**
@@ -44,29 +44,33 @@ function saveTasks(tasks) {
  * @param {Array} tasks
  */
 function renderTasks(tasks) {
+  // Select containers for each status column
   const todoContainer = document.querySelector('.tasks-container[data-status="todo"]');
   const doingContainer = document.querySelector('.tasks-container[data-status="doing"]');
   const doneContainer = document.querySelector('.tasks-container[data-status="done"]');
 
+  // Clear current tasks inside containers
   todoContainer.innerHTML = '';
   doingContainer.innerHTML = '';
   doneContainer.innerHTML = '';
 
+  // Loop over each task and create a div for it
   tasks.forEach(task => {
-    const div = document.createElement('div');
-    div.classList.add('task-div');
-    div.textContent = task.title;
-    div.dataset.taskId = task.id;
+    const div = document.createElement('div'); // create new div element
+    div.classList.add('task-div'); // add CSS class for styling
+    div.textContent = task.title; // set visible task title text
+    div.dataset.taskId = task.id; // store task id as data attribute for reference
 
-    // When task is clicked, open modal with details
+    // Add click event to open modal and view/edit task details
     div.addEventListener('click', () => openTaskModal(task, tasks));
 
+    // Append task div to its appropriate column container based on status
     if (task.status === 'todo') todoContainer.appendChild(div);
     else if (task.status === 'doing') doingContainer.appendChild(div);
     else if (task.status === 'done') doneContainer.appendChild(div);
   });
 
-  // Update counts in header
+  // Update the counts in each column header
   document.getElementById('todoText').textContent = `TODO (${tasks.filter(t => t.status === 'todo').length})`;
   document.getElementById('doingText').textContent = `DOING (${tasks.filter(t => t.status === 'doing').length})`;
   document.getElementById('doneText').textContent = `DONE (${tasks.filter(t => t.status === 'done').length})`;
@@ -78,38 +82,39 @@ function renderTasks(tasks) {
  * @param {Array} tasks - The full task list (used for saving edits).
  */
 function openTaskModal(task, tasks) {
-  const modal = document.getElementById('modal');
-  const titleInput = document.getElementById('taskTitleInput');
-  const descInput = document.getElementById('taskDescriptionInput');
-  const statusSelect = document.getElementById('taskStatusInput');
-  const saveBtn = document.getElementById('saveTaskBtn');
-  const modalHeading = document.querySelector('#modal-content h1');
+  const modal = document.getElementById('modal'); // modal container
+  const titleInput = document.getElementById('taskTitleInput'); // title input field
+  const descInput = document.getElementById('taskDescriptionInput'); // description textarea
+  const statusSelect = document.getElementById('taskStatusInput'); // status dropdown
+  const saveBtn = document.getElementById('saveTaskBtn'); // save button in modal
+  const modalHeading = document.querySelector('#modal-content h1'); // modal heading element
 
-  modal.style.display = 'flex';
+  modal.style.display = 'flex'; // show the modal
 
   if (task) {
-    // Viewing/editing existing task
-    modalHeading.textContent = 'Edit Task';
-    titleInput.value = task.title;
-    descInput.value = task.description || '';
-    statusSelect.value = task.status;
-    saveBtn.textContent = 'Save Changes';
+    // Editing existing task
+    modalHeading.textContent = 'Edit Task'; // set modal title
+    titleInput.value = task.title; // fill in existing title
+    descInput.value = task.description || ''; // fill description or empty if missing
+    statusSelect.value = task.status; // set current status
+    saveBtn.textContent = 'Save Changes'; // button text
 
-    // Remove previous event listener to avoid duplicates
+    // Remove any old event listeners from save button to prevent duplicates
     saveBtn.replaceWith(saveBtn.cloneNode(true));
     const newSaveBtn = document.getElementById('saveTaskBtn');
 
+    // Add new click event listener for saving edits
     newSaveBtn.addEventListener('click', () => {
-      const newTitle = titleInput.value.trim();
-      const newDesc = descInput.value.trim();
-      const newStatus = statusSelect.value;
+      const newTitle = titleInput.value.trim(); // get updated title
+      const newDesc = descInput.value.trim(); // get updated description
+      const newStatus = statusSelect.value; // get updated status
 
-      if (!newTitle) {
+      if (!newTitle) { // validate title is not empty
         alert('Please enter a task title.');
-        return;
+        return; // stop saving if invalid
       }
 
-      // Update task in tasks array
+      // Find task in array and update properties
       const idx = tasks.findIndex(t => t.id === task.id);
       if (idx !== -1) {
         tasks[idx].title = newTitle;
@@ -117,40 +122,42 @@ function openTaskModal(task, tasks) {
         tasks[idx].status = newStatus;
       }
 
-      saveTasks(tasks);
-      renderTasks(tasks);
-      modal.style.display = 'none';
+      saveTasks(tasks); // save updated array to localStorage
+      renderTasks(tasks); // re-render task list with changes
+      modal.style.display = 'none'; // hide modal
     });
 
   } else {
-    // Adding new task
-    modalHeading.textContent = 'Add New Task';
-    titleInput.value = '';
+    // Adding a new task
+    modalHeading.textContent = 'Add New Task'; // modal title
+    titleInput.value = ''; // clear inputs
     descInput.value = '';
-    statusSelect.value = 'todo';
-    saveBtn.textContent = 'Create Task';
+    statusSelect.value = 'todo'; // default status todo
+    saveBtn.textContent = 'Create Task'; // button text
 
+    // Remove old listeners to avoid stacking
     saveBtn.replaceWith(saveBtn.cloneNode(true));
     const newSaveBtn = document.getElementById('saveTaskBtn');
 
+    // Add click listener to create new task
     newSaveBtn.addEventListener('click', () => {
-      const title = titleInput.value.trim();
-      const description = descInput.value.trim();
-      const status = statusSelect.value;
+      const title = titleInput.value.trim(); // new task title
+      const description = descInput.value.trim(); // new task description
+      const status = statusSelect.value; // selected status
 
-      if (!title) {
+      if (!title) { // validation
         alert('Please enter a task title.');
         return;
       }
 
-      // Create new task with unique id
+      // Generate a new unique id (max existing id +1)
       const newId = tasks.length ? Math.max(...tasks.map(t => t.id)) + 1 : 1;
       const newTask = { id: newId, title, description, status };
 
-      tasks.push(newTask);
-      saveTasks(tasks);
-      renderTasks(tasks);
-      modal.style.display = 'none';
+      tasks.push(newTask); // add new task to tasks array
+      saveTasks(tasks); // save updated tasks array
+      renderTasks(tasks); // re-render tasks on page
+      modal.style.display = 'none'; // hide modal
     });
   }
 }
@@ -159,13 +166,15 @@ function openTaskModal(task, tasks) {
  * Sets up modal close button and outside-click close.
  */
 function setupModalClose() {
-  const modal = document.getElementById('modal');
-  const closeBtn = document.getElementById('close-modal');
+  const modal = document.getElementById('modal'); // modal element
+  const closeBtn = document.getElementById('close-modal'); // close button inside modal
 
+  // Close modal when close button clicked
   closeBtn.addEventListener('click', () => {
     modal.style.display = 'none';
   });
 
+  // Close modal if user clicks outside modal content (on overlay)
   window.addEventListener('click', e => {
     if (e.target === modal) {
       modal.style.display = 'none';
@@ -177,14 +186,15 @@ function setupModalClose() {
  * Main app initialization function.
  */
 function init() {
-  let tasks = loadTasks();
+  let tasks = loadTasks(); // load tasks from storage or defaults
 
-  renderTasks(tasks);
-  setupModalClose();
+  renderTasks(tasks); // show tasks on page
+  setupModalClose(); // set modal close functionality
 
-  const addTaskBtn = document.getElementById('addTaskBtn');
+  const addTaskBtn = document.getElementById('addTaskBtn'); // Add Task button
+  // Open modal for adding new task when button clicked
   addTaskBtn.addEventListener('click', () => openTaskModal(null, tasks));
 }
 
-// Start app after DOM loaded
+// Run init function when DOM content is fully loaded
 window.addEventListener('DOMContentLoaded', init);
