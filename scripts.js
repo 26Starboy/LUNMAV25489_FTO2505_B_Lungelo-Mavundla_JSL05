@@ -1,26 +1,4 @@
-const STORAGE_KEY = "kanban_tasks";
-
-let tasks = []; // holds current tasks in memory
-let currentTask = null;
-
-// Load tasks from localStorage or fallback to initialTasks
-function loadTasks() {
-  const savedTasks = localStorage.getItem(STORAGE_KEY);
-  if (savedTasks) {
-    tasks = JSON.parse(savedTasks);
-  } else {
-    tasks = [...initialTasks]; // clone array
-    saveTasks();
-  }
-}
-
-// Save tasks array to localStorage
-function saveTasks() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
-}
-
-// Render all tasks and update counts
-function updateCanban() 
+function updateCanban() {
   const todoDiv = document.getElementById("todo-tasks");
   const doingDiv = document.getElementById("doing-tasks");
   const doneDiv = document.getElementById("done-tasks");
@@ -53,105 +31,34 @@ function updateCanban()
   document.getElementById("toDoText").textContent = `TODO (${todoCount})`;
   document.getElementById("doingText").textContent = `DOING (${doingCount})`;
   document.getElementById("doneText").textContent = `DONE (${doneCount})`;
+}
 
-  // Open modal for editing task by ID
+function openAddTaskModal() {
+  currentTask = null;
+  closeModal();
+
+  document.getElementById("modal-title").textContent = "Add New Task";
+  document.querySelector(".createtask-btn").textContent = "Create Task";
+
+  document.getElementById("edit-task-title").value = "";
+  document.getElementById("edit-task-description").value = "";
+  document.getElementById("edit-task-status").value = "todo";
+
+  document.getElementById("task-modal").showModal();
+  document.getElementById("edit-task-title").focus();
+}
+
 function openEditModal(id) {
   currentTask = tasks.find(t => t.id === id);
   if (!currentTask) return;
+
+  document.getElementById("modal-title").textContent = "Edit Task";
+  document.querySelector(".createtask-btn").textContent = "Update Task";
 
   document.getElementById("edit-task-title").value = currentTask.title;
   document.getElementById("edit-task-description").value = currentTask.description;
   document.getElementById("edit-task-status").value = currentTask.status;
 
   document.getElementById("task-modal").showModal();
+  document.getElementById("edit-task-title").focus();
 }
-
-// Close any open modal and reset currentTask
-function closeModal() {
-  const modal = document.getElementById("task-modal");
-  modal.close();
-  currentTask = null;
-
-  // Clear inputs
-  document.getElementById("edit-task-title").value = "";
-  document.getElementById("edit-task-description").value = "";
-  document.getElementById("edit-task-status").value = "todo";
-}
-
-// Save changes to currentTask and update board
-function updateTask() {
-  if (!currentTask) return;
-
-  const title = document.getElementById("edit-task-title").value.trim();
-  const description = document.getElementById("edit-task-description").value.trim();
-  const status = document.getElementById("edit-task-status").value;
-
-  if (!title) {
-    alert("Task title cannot be empty!");
-    return;
-  }
-
-  currentTask.title = title;
-  currentTask.description = description;
-  currentTask.status = status;
-
-  saveTasks();
-  updateCanban();
-  closeModal();
-}
-
-// Open Add Task modal (reuse same modal or create separate modal if preferred)
-function openAddTaskModal() {
-  currentTask = null; // reset
-  closeModal(); // just in case
-
-  // Clear inputs for adding new task
-  document.getElementById("edit-task-title").value = "";
-  document.getElementById("edit-task-description").value = "";
-  document.getElementById("edit-task-status").value = "todo";
-
-  document.getElementById("task-modal").showModal();
-}
-
-// Add new task from modal inputs
-function addTask() {
-  const title = document.getElementById("edit-task-title").value.trim();
-  const description = document.getElementById("edit-task-description").value.trim();
-  const status = document.getElementById("edit-task-status").value;
-
-  
-  if (!title) {
-    alert("Task title cannot be empty!");
-    return;
-  }
-
-  const newTask = {
-    id: Date.now(), // unique id
-    title,
-    description,
-    status
-  };
-
-  tasks.push(newTask);
-  saveTasks();
-  updateCanban();
-  closeModal();
-}
-// On DOM load, initialize tasks and bind buttons
-document.addEventListener("DOMContentLoaded", () => {
-  loadTasks();
-  updateCanban();
-
-  document.getElementById("addnewtaskbtn").onclick = openAddTaskModal;
-  
-  // For modal: distinguish between add or update by checking currentTask
-  document.querySelector(".createtask-btn").onclick = () => {
-    if (currentTask) {
-      updateTask();
-    } else {
-      addTask();
-    }
-  };
-
-  document.querySelector(".close-btn").onclick = closeModal;
-});
