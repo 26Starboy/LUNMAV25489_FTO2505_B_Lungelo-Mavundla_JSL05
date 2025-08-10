@@ -53,4 +53,3 @@ function updateCanban()
   document.getElementById("toDoText").textContent = `TODO (${todoCount})`;
   document.getElementById("doingText").textContent = `DOING (${doingCount})`;
   document.getElementById("doneText").textContent = `DONE (${doneCount})`;
-}
