@@ -46,3 +46,11 @@ A simple, responsive Kanban-style task management web application that allows us
 - Google Fonts - Plus Jakarta Sans
 
 ---
+
+## LINKS USED
+
+- Google Fonts - Plus Jakarta Sans
+  https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;1,400&display=swap
+- https://www.w3schools.com/
+- htttps://roadmap.sh/
+
