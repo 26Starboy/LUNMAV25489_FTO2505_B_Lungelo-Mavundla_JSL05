@@ -77,3 +77,25 @@ function closeModal() {
   document.getElementById("edit-task-description").value = "";
   document.getElementById("edit-task-status").value = "todo";
 }
+
+// Save changes to currentTask and update board
+function updateTask() {
+  if (!currentTask) return;
+
+  const title = document.getElementById("edit-task-title").value.trim();
+  const description = document.getElementById("edit-task-description").value.trim();
+  const status = document.getElementById("edit-task-status").value;
+
+  if (!title) {
+    alert("Task title cannot be empty!");
+    return;
+  }
+
+  currentTask.title = title;
+  currentTask.description = description;
+  currentTask.status = status;
+
+  saveTasks();
+  updateCanban();
+  closeModal();
+}
