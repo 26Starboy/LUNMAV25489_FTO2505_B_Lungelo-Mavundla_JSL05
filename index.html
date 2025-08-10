@@ -1,127 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;1,400&display=swap"
-    rel="stylesheet"
-  />
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon.svg" />
-  <script defer src=".scripts.js"></script>
-  <title>Kanban Task Management</title>
-</head>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;1,400&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="./modal.css" />
+		<link rel="stylesheet" href="./styles.css" />
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="./assets/favicon.svg"
+		/>
+		<title>Kanban Task Management</title>
+	</head>
 
-<body>
-  <!-- Navigation Sidebar -->
-  <nav class="side-bar" id="side-bar-div">
-    <div id="side-logo-div">
-      <img id="logo" src="./assets/logo-light.svg" alt="logo-light" />
-    </div>
+	<body>
+		<!-- Navigation Sidebar: Contains the logo, navigation links for boards, and theme toggle. -->
+		<nav class="side-bar" id="side-bar-div">
+			<div id="side-logo-div">
+				<img id="logo" src="./assets/logo-light.svg" alt="logo-light" />
+			</div>
 
-    <div class="boards-nav-links-div" id="boards-nav-links-div">
-      <h4 id="headline-sidepanel">ALL BOARDS (1)</h4>
-      <button class="board-btn">Launch Career</button>
-    </div>
+			<div class="boards-nav-links-div" id="boards-nav-links-div">
+				<h4 id="headline-sidepanel">ALL BOARDS (1)</h4>
+				<button class="board-btn">Launch Career</button>
+			</div>
+		</nav>
 
-    <div class="board-toggle-div">
-      <div class="toggleswitch-div">
-        <div>☀️</div>
-        <div class="toggleswitch-btn" id="toggleswitch-btn">
-          <div class="toggleswitch-btn-circle" id="toggleswitch-btn-circle"></div>
-        </div>
-        <div>⚫</div>
-      </div>
-      <button class="sidebar-btn" id="sidebar-btn">
-        <span>🚫</span> Hide Sidebar
-      </button>
-    </div>
-  </nav>
+		<!-- Main Layout: Header with board title, add task button, and main content area for task columns. -->
+		<div id="layout">
+			<header id="header" class="sticky-header">
+				<div class="header-name-div">
+					<img
+						src="./assets/favicon.svg"
+						alt="logo-mobile"
+						class="logo-mobile"
+					/>
+					<h2 class="header-board-name" id="header-board-name">
+						Launch Career
+					</h2>
+					<button id="addTaskBtn">
+						<span class="desktop-view-add-task-btn">+ Add New Task</span
+						><span class="mobile-view-add-task-btn">+</span>
+					</button>
+				</div>
+			</header>
 
-  <!-- Main Layout -->
-  <div id="layout">
-    <header id="header" class="sticky-header">
-      <div class="header-name-div">
-        <img src="./assets/favicon.svg" alt="logo-mobile" class="logo-mobile" />
-        <h2 class="header-board-name" id="header-board-name">Launch Career</h2>
-      </div>
-      <button class="addnewtask-btn" id="addnewtaskbtn" onclick="openAddTaskModal()">
-        <span class="addnewtask-btn-text">Add New Task</span>
-      </button>
-    </header>
+			<div class="container">
+				<main class="card-column-main">
+					<!-- Task Columns: Display tasks grouped by status (TODO, DOING, DONE). -->
+					<div class="column-div" data-status="todo">
+						<div id="todo-head-div" class="column-head-div">
+							<span class="dot" id="todo-dot"></span>
+							<h4 id="todoText" class="columnHeader"></h4>
+						</div>
+						<!-- Tasks container for TODO -->
+						<div class="tasks-container" data-status="todo">
+							<!-- tasks will be dynamically added -->
+						</div>
+					</div>
+					<!-- DOING Column -->
+					<div class="column-div" data-status="doing">
+						<div id="doing-head-div" class="column-head-div">
+							<span class="dot" id="doing-dot"></span>
+							<h4 id="doingText" class="columnHeader"></h4>
+						</div>
+						<!-- Tasks container for DOING -->
+						<div class="tasks-container" data-status="doing">
+							<!-- tasks will be dynamically added -->
+						</div>
+					</div>
+					<!-- DONE Column -->
+					<div class="column-div" data-status="done">
+						<div id="done-head-div" class="column-head-div">
+							<span class="dot" id="done-dot"></span>
+							<h4 id="doneText" class="columnHeader"></h4>
+						</div>
+						<!-- Tasks container for DONE -->
+						<div class="tasks-container" data-status="done">
+							<!-- tasks will be dynamically added -->
+						</div>
+					</div>
+				</main>
+			</div>
+		</div>
 
-<div class="container">
-        <main class="card-column-main">
-          <!-- Task Columns: Display tasks grouped by status (TODO, DOING, DONE). -->
-          <div class="column-div" data-status="todo">
-            <div id="todo-head-div" class="column-head-div">
-              <span class="dot" id="todo-dot"></span>
-              <h4 id="toDoText" class="columnHeader">TODO (4)</h4>
-            </div>
-            <!-- Tasks container for TODO -->
-            <div class="tasks-container">
-              <div class="task-div">Launch Epic Career 🚀</div>
-              <div class="task-div">Conquer React⚛️</div>
-              <div class="task-div">Understand Databases⚙️</div>
-              <div class="task-div">Crush Frameworks🖼️</div>
-            </div>
-          </div>
-          <!-- DOING Column -->
-          <div class="column-div" data-status="doing">
-            <div id="doing-head-div" class="column-head-div">
-              <span class="dot" id="doing-dot"></span>
-              <h4 id="doingText" class="columnHeader">DOING (2)</h4>
-            </div>
-            <!-- Tasks container for DOING -->
-            <div class="tasks-container">
-              <div class="task-div">Master JavaScript 💛</div>
-              <div class="task-div">Never Give Up 🏆</div>
-            </div>
-          </div>
-          <!-- DONE Column -->
-          <div class="column-div" data-status="done">
-            <div id="done-head-div" class="column-head-div">
-              <span class="dot" id="done-dot"></span>
-              <h4 id="doneText" class="columnHeader">DONE (2)</h4>
-            </div>
-            <!-- Tasks container for DONE -->
-            <div class="tasks-container">
-              <div class="task-div">Explore ES6 Features 🚀</div>
-              <div class="task-div">Have fun 🥳</div>
-            </div>
-          </div>
+		<!-- modal structure and the inputs -->
 
-<dialog id="task-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-  <div class="modal-body">
-    <div class="modal-header">
-      <h3 id="modal-title">Task</h3>
-      <button class="close-btn" aria-label="Close modal" onclick="closeModal()">×</button>
-    </div>
+		<div id="modal" class="modal" style="display: none">
+			<!--hiding the modal from the page -->
+			<div id="modal-content" class="modal-content">
+				<button id="close-modal" class="close-btn">&times;</button>
+				<h1 id="modal-heading"></h1>
 
-    <div class="task-details">
-      <h4 class="Section-discription">Title</h4>
-      <input id="edit-task-title" type="text" />
-    </div>
+				<!-- all the inputs for the modal -->
 
-    <div class="task-details">
-      <h4 class="Section-discription">Description</h4>
-      <textarea id="edit-task-description"></textarea>
-    </div>
+				<label>Title</label><br />
+				<input
+					type="text"
+					id="taskTitleInput"
+					required
+					placeholder="e.g. Take chilled break"
+				/><br /><br />
+				<label>Description</label><br />
+				<textarea
+					id="taskDescriptionInput"
+					rows="6"
+					placeholder="e.g Pet your dog, have a cup of coffee,dance to your favourite song and come back to crush this challenge."
+				></textarea
+				><br /><br />
 
-    <div class="task-details">
-      <h4 class="Section-discription">Status</h4>
-      <select id="edit-task-status">
-        <option value="todo">Todo</option>
-        <option value="doing">Doing</option>
-        <option value="done">Done</option>
-      </select>
-    </div>
-
-    <div class="modal-footer">
-      <button class="createtask-btn" onclick="addTask()">Create task</button>
-    </div>
-  </div>
-</dialog>
-</body>
+				<label>Status</label><br />
+				<select id="taskStatusInput">
+					<option value="doing">Doing</option>
+					<option value="done">Done</option>
+					<option value="todo">Todo</option></select
+				><br /><br />
+				<button id="saveTaskBtn" class="save-btn"></button>
+			</div>
+		</div>
+		<script type="module" src="./script.js"></script>
+	</body>
 </html>
