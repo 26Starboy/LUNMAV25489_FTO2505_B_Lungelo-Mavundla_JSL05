@@ -137,3 +137,21 @@ function addTask() {
   updateCanban();
   closeModal();
 }
+// On DOM load, initialize tasks and bind buttons
+document.addEventListener("DOMContentLoaded", () => {
+  loadTasks();
+  updateCanban();
+
+  document.getElementById("addnewtaskbtn").onclick = openAddTaskModal;
+  
+  // For modal: distinguish between add or update by checking currentTask
+  document.querySelector(".createtask-btn").onclick = () => {
+    if (currentTask) {
+      updateTask();
+    } else {
+      addTask();
+    }
+  };
+
+  document.querySelector(".close-btn").onclick = closeModal;
+});
