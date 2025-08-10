@@ -46,11 +46,3 @@ A simple, responsive Kanban-style task management web application that allows us
 - Google Fonts - Plus Jakarta Sans
 
 ---
-
-## Setup and Installation
-
-1. **Clone the repository**
-
-   ```bash
-   git clone https://github.com/yourusername/kanban-task-management.git
-   cd kanban-task-management
