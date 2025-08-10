@@ -45,3 +45,25 @@
         </button>
       </div>
     </nav>
+
+      <!-- Main Layout: Header with board title, add task button, and main content area for task columns. -->
+    <div id="layout">
+      <header id="header" class="sticky-header">
+        <div class="header-name-div">
+          <img
+            src="./assets/favicon.svg"
+            alt="logo-mobile"
+            class="logo-mobile"
+          />
+          <h2 class="header-board-name" id="header-board-name">
+            Launch Career
+          </h2>
+        </div>
+        <button
+          class="addnewtask-btn"
+          id="addnewtaskbtn"
+          onclick="openAddTaskModal()"
+        >
+          + <span class="addnewtask-btn-text">Add New Task</span>
+        </button>
+      </header>
