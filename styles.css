@@ -1,329 +1,563 @@
+/* ========================
+   Global & Root Variables
+======================== */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: sans-serif;
-  }
-  
-  body {
-    height: 100vh;
-    background-color: #f4f6fb;
-    overflow-y: auto;
-    margin: 0;
-  }
-  
- 
-  .container {
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    height: 100vh;
-  }
-
-    /* Sidebar */
-
-  .sidebar {
-    background-color: white;
-    color: white;
-    padding: 1.5rem 0 1.5rem 0; 
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-  }
-  
-  .sidebar h4 {
-    color: #828FA3;
-    margin-bottom: 1rem;
-    font-size: 12px;
-    font-family: "Plus Jakarta Sans", sans-serif;
-    font-weight: 700;
-    letter-spacing: 2.4px;
-    margin-left: 32px;
-    width: 123px;
-    height: 15px;
-    margin-bottom: 19px;
-  }
-
-    .logo-img {
-    width: 152.23px;
-    height: 25.22px; 
-    margin-top:32.78px;
-    margin-bottom: 54px;
-    margin-left: 34px;
-  }
-  .board-button {
-  background-color: #635FC7;
-  border: none;
-  color: white;
-  padding: 14px 106px 15px 64px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-  width: 276px;
-  height: 48px;
-  margin: 0; 
-  border-radius: 0px 24px 24px 0px;;
-  }
-  
-  /*Header */
-
-  .header {
-    padding: 1.5rem;
-    background-color: white;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .header h2 {
-    font-size: 24px;
-    font-weight: 700;
-    line-height: 100%;
-    width: 169px;
-    height: 30px;
-    margin-top: 29px;
-    margin-left: 24px;
-    font-family: "Plus Jakarta Sans", sans-serif;
-  }
-  .header-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 24px;
+  box-sizing: border-box; /* Ensures padding and border are included in total element size */
 }
-  /* Add Task Button */
-  .add-task-button {
-  background-color: #635fc7;
-  color: white;
-  border: none;
-  padding: 10px 24px;
-  border-radius: 24px;
-  font-size: 14px;
-  font-weight: 700;
+
+:root {
+  --primary-color: #ffffff;
+  --secondary-color: #f4f7fd;
+  --primary-font-color: #000000;
+  --secondary-font-color: #828fa3;
+  --primary-box-shadow: 0px 4px 6px rgba(54, 78, 126, 0.1015); /* Subtle shadow for card depth */
+  --sidebar-width: 300px; /* Sidebar fixed width */
+}
+
+/* ================
+     Base Elements
+  ================ */
+body {
   font-family: "Plus Jakarta Sans", sans-serif;
-  cursor: pointer;
-  float: right;
-  margin-right: 24px;
-  margin-top: 29px;
+  display: flex; /* Allow layout to span horizontally */
+  flex-direction: row;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  background-color: var(--secondary-color);
+  font-size: 1rem; /* Base font size for rem scaling */
 }
 
-  /*Column */
-
-  .columns-section {
-    display: flex;
-    gap: 1.5rem;
-    padding: 2rem;
-    height: 100%;
-  }
-  
-  .column {
-    padding: 1rem;
-    border-radius: 12px;
-    min-width: 280px;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    margin-right: 20px;
-  }
-  
-  .column-header {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-  }
-  
-  .column-header h4 {
-    font-size: 12px;
-    line-height: 100%;
-    letter-spacing: 2.4px;
-    font-weight: 700;
-    font-family: "Plus Jakarta Sans", sans-serif;
-    color: #828FA3;
-  }
-
- 
-  /*Tasks */
-
-  .tasks {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-    .task {
-    background-color: white;
-    width: 280px;
-    height: 60px;
-    padding: 20px;
-    border-radius: 8px;
-    font-size: 15px;
-    font-family: "Plus Jakarta Sans", sans-serif;
-    font-weight: 700;
-    line-height: 100%;
-    box-shadow: 0px 4px 6px 0px #364E7E1A;
-    cursor: pointer;
-    margin-bottom: 20px;
-
-  }
-  
-  /*Status Dots */
-
-  .todo-dot,.doing-dot,.done-dot {
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    display: inline-block;
-  }
-  
-  .todo-dot {
-    background-color: #49C4E5;
-  }
-  
-  .doing-dot {
-    background-color: #8471F2;
-  }
-  
-  .done-dot {
-    background-color: #67E2AE;
-  }
-
-  /* Modal */
-  .modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4);
+/* ================
+     Sidebar Layout
+  ================ */
+.side-bar {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  background-color: var(--primary-color);
+  border-right: 1px solid #e4ebfa; /* Light divider */
+  width: var(--sidebar-width);
+  height: 100vh;
+}
+
+#side-logo-div {
+  margin: 33px 113px 54px 34px; /* Spacing around logo */
+  display: flex;
+  justify-content: flex-start;
+}
+
+#logo {
+  width: 100%; /* Make logo responsive within container */
+}
+
+.boards-nav-links-div {
+  display: flex;
+  flex-direction: column;
+  color: var(--primary-font-color);
+}
+
+#headline-sidepanel {
+  padding: 0 12px 0 50px; /* Aligns section content from left and right */
+}
+
+h4 {
+  color: var(--secondary-font-color);
+  font-size: 0.75rem;
+  letter-spacing: 0.125rem; /* Makes heading more spaced */
+}
+
+.board-btn {
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between icon and text */
+  background-color: #635fc7;
+  color: #fff;
+  border: none;
+  border-radius: 0 100px 100px 0; /* Pill shape only on right side */
+  height: 48px;
+  width: 276px;
+  padding: 28px 12px 28px 50px;
+  font-size: 0.9375rem;
+  font-weight: bold;
+  cursor: pointer;
+  overflow: hidden; /* Prevents overflowed text/icons from showing */
+}
+
+.board-toggle-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: absolute;
+  bottom: 0%; /* Position at the bottom of sidebar */
+}
+
+.toggleswitch-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #f4f7fd;
+  border: none;
+  border-radius: 6px;
+  height: 48px;
+  width: 251px;
+  margin: 0px auto 20px 16px;
+  padding: 0px 64px 0px 64px;
+  font-size: 0.9375rem;
+}
+
+.toggleswitch-btn {
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  background-color: #635fc7;
+  border: none;
+  border-radius: 12px;
+  height: 20px;
+  width: 40px;
+  padding: 0px 5px 0px 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.toggleswitch-btn-circle {
+  background-color: #fff;
+  border-radius: 50%; /* Make it circular */
+  height: 14px;
+  width: 14px;
+  transition: all 0.3s ease; /* Smooth transition for toggle */
+}
+
+.sidebar-btn {
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between icon and text */
+  background-color: #635fc7;
+  color: #fff;
+  border: none;
+  border-radius: 0 100px 100px 0; /* Pill shape only on right side */
+  height: 48px;
+  width: 276px;
+  padding: 28px 12px 28px 50px;
+  font-size: 0.9375rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 16px;
+}
+
+/* ===============
+     Main Layout
+  ================ */
+#layout {
+  flex: 1; /* Fills remaining space beside sidebar */
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  width: 100%;
+}
+
+/* ===============
+     Header Section
+  ================ */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--primary-color);
+  color: var(--primary-font-color);
+  height: 96px;
+  padding: 0 35px 0 30px;
+  border-bottom: 1px solid #e4ebfa;
+  width: 100%;
+  font-size: 1.875rem;
+  font-weight: 600;
+}
+
+.header-name-div {
+  display: flex;
   align-items: center;
 }
 
-.modal {
-  background: white;
-  padding: 35px 35px 35px 35px;
+.logo-mobile {
+  display: none; /* Hidden on desktop; shown on smaller screens */
+}
+
+.addnewtask-btn {
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  background-color: #635fc7;
+  color: #fff;
+  border: none;
+  border-radius: 100px; /* Pill shape button */
+  height: 48px;
+  width: 164px;
+  padding: 15px 25px 14px 24px;
+  font-size: 0.938rem;
+  font-weight: 700;
+  cursor: pointer;
+  overflow: hidden; /* Prevents overflowed text/icons from showing */
+}
+
+/* ===============
+     Board Columns
+  ================ */
+.container {
+  display: flex;
+  flex-direction: column;
+  padding-left: 35px;
+  box-sizing: border-box;
+}
+
+.card-column-main {
+  display: grid;
+  grid-template-columns: repeat(
+    3,
+    minmax(0, 304px)
+  ); /* 3 columns with min size */
+  gap: 8px; /* Space between columns */
+}
+
+.column-div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 12px;
+}
+
+.column-head-div {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between dot and column title */
+}
+
+.columnHeader {
+  font-size: 0.75rem;
+  letter-spacing: 0.125rem;
+  color: var(--secondary-font-color);
+  margin: 0;
+}
+
+/* Status Dots */
+.dot {
+  height: 15px;
+  width: 15px;
+  border-radius: 50%; /* Make it circular */
+  display: inline-block;
+}
+
+#todo-dot {
+  background-color: #49c4e5;
+}
+
+#doing-dot {
+  background-color: #8471f2;
+}
+
+#done-dot {
+  background-color: #219c90;
+}
+
+/* ===============
+     Task Cards
+  ================ */
+.tasks-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.task-div {
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  width: 100%;
+  height: 60px;
+  background-color: var(--primary-color);
+  color: var(--primary-font-color);
+  border-radius: 12px;
+  box-shadow: var(--primary-box-shadow);
+  cursor: pointer; /* Indicate it's clickable */
+  margin-bottom: 20px;
+  font-size: 0.9375rem;
+  font-weight: bold;
+}
+
+/*================
+     Edit Task Modal
+  ================ */
+
+#task-modal {
+  flex-direction: column;
+  border: 0px solid #e4ebfa;
+  border-radius: 12px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 1000;
+  transform: translate(-50%, -50%);
+  background-color: var(--primary-color);
   width: 479px;
-  height:479px;
-  border-radius: 6px;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  max-width: 50%;
+  margin: 0;
+  padding-top: 0px;
+}
+
+#task-modal1 {
+  flex-direction: column;
+  border: 0px solid #e4ebfa;
+  border-radius: 12px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 1000;
+  transform: translate(-50%, -50%);
+  background-color: var(--primary-color);
+  width: 479px;
+  max-width: 50%;
+  margin: 0;
+  padding-top: 0px;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
 }
 
 .modal-header {
+  padding: 0px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2em;
 }
 
-.modal-header h3 {
-  font-size: 20px;
-  font-weight: 700;
-}
-
-.close-button {
-  font-size: 24px;
+.close-btn {
+  background-color: var(--primary-color);
+  border: 0px solid var(--primary-color);
+  color: #ea5555; /* Close button color */
+  font-size: 1.5rem;
+  width: 40px;
   cursor: pointer;
-  font-weight: bold;
-  color: red;
+  padding-right: 0px;
 }
 
-.modal-body label {
-  display: block;
-  margin: 0.5rem 0 0.25rem;
-  font-weight: 600;
-  font-size: 14px;
-  color: #333;
+.Section-discription {
+  margin-bottom: 10px; /* Space below description */
+  margin-top: 0px; /* No space above description */
 }
 
-.modal-body input,
-.modal-body textarea,
-.modal-body select {
+.task-details {
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  padding: 0.6rem;
-  border: 1px solid #ccc;
-  margin-bottom: 1rem;
-  font-size: 14px;
+  margin-bottom: 25px;
 }
 
 .modal-footer {
   display: flex;
-  justify-content: space-between;
-  padding: 35px 0 0 0;
 }
 
-.save-btn {
-  background-color: #635fc7;
-  color: white;
+.savechanges-btn {
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #635fc7; /* Primary button color */
+  color: #fff;
   border: none;
-  width: 200px;
-  height:40px;
-  padding: 0.6rem 1.2rem;
-  border-radius: 20px;
-  font-weight: 600;
+  border-radius: 100px; /* Pill shape button */
+  height: 40px;
+  width: 164px;
+  padding: 15px 25px 14px 24px;
+  font-size: 0.938rem;
+  font-weight: bold;
   cursor: pointer;
 }
 
-.delete-btn {
-  background-color: #ea5555;
-  color: white;
+.createtask-btn {
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #635fc7; /* Primary button color */
+  color: #fff;
   border: none;
-  width:200px;
-  height:40px;
-  padding: 0.6rem 1.2rem;
-  border-radius: 20px;
-  font-weight: 600;
+  border-radius: 100px; /* Pill shape button */
+  height: 40px;
+  width: 100%;
+  padding: 15px 25px 14px 24px;
+  font-size: 0.938rem;
+  font-weight: bold;
   cursor: pointer;
 }
 
-
-.hidden {
-  display: none;
+#edit-task-title {
+  padding: 10px;
+  font-size: 0.8rem;
+  border: 1px solid #e4ebfa; /* Light border */
+  border-radius: 4px; /* Rounded corners */
 }
 
-  /* Media query  */
+#edit-task-description {
+  padding: 10px;
+  font-size: 0.8rem;
+  border: 1px solid #e4ebfa; /* Light border */
+  border-radius: 4px; /* Rounded corners */
+}
 
-  @media (max-width: 768px) {
-    .container {
-      grid-template-columns: 1fr; 
-    }
-  
-    .sidebar {
-      display: none; 
-    }
-  
-    .columns-section {
-      flex-direction: column;
-    }
-  
-    .column {
-      width: 100%;
-      margin-bottom: -2em;
-    
-    }
-    .task {
-      width: 100%;
-      margin-bottom: 20px;
-    }
-    
-/* Modal media query */
-    .modal {
-    width: 90%;
+#edit-task-status {
+  padding: 10px;
+  font-size: 0.8rem;
+  border: 1px solid #e4ebfa; /* Light border */
+  border-radius: 4px; /* Rounded corners */
+}
+
+#add-task-title {
+  padding: 10px;
+  font-size: 0.8rem;
+  border: 1px solid #e4ebfa; /* Light border */
+  border-radius: 4px; /* Rounded corners */
+}
+
+#add-task-description {
+  padding: 10px;
+  font-size: 0.8rem;
+  border: 1px solid #e4ebfa; /* Light border */
+  border-radius: 4px; /* Rounded corners */
+}
+
+#add-task-status {
+  padding: 10px;
+  font-size: 0.8rem;
+  border: 1px solid #e4ebfa; /* Light border */
+  border-radius: 4px; /* Rounded corners */
+}
+
+/* ===============
+     Headings
+  ================ */
+h2 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+/* ========================
+     Responsive Styles
+  ======================== */
+
+/******** Tablets ********/
+@media screen and (max-width: 1023px) {
+  .side-bar {
+    display: none; /* Hide sidebar on tablets and smaller */
+  }
+
+  .side-bar.show-sidebar {
+    display: flex !important;
+    position: fixed; /* Overlay on top of page */
     height: auto;
-    padding: 25px;
-    border-radius: 6px;
   }
 
-  .modal-footer {
-    flex-direction: column;
-    gap: 1rem;
-    align-items: center;
-    padding-top: 1.5rem;
+  #side-logo-div {
+    display: none;
   }
 
-  .save-btn,
-  .delete-btn {
+  .logo-mobile {
+    display: block;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+  }
+
+  body {
+    font-size: 0.8rem;
+  }
+
+  .board-btn {
+    font-size: 0.8rem;
+    padding-left: 15px;
+    margin-right: 15px;
+    font-weight: 700;
+  }
+
+  .container {
+    padding: 0;
     width: 100%;
-    max-width: 100%;
-    height: 45px;
-    border-radius: 20px;
+    align-items: center; /* Center columns on smaller screens */
   }
+
+  .card-column-main {
+    grid-template-columns: repeat(2, minmax(0, 360px));
+    gap: 8px;
   }
+
+  header {
+    height: 64px;
+    padding: 0 10px 0 18px;
+    border: none;
+  }
+
+  #header-board-name {
+    font-size: 1rem;
+  }
+
+  .task-div {
+    width: 100%;
+  }
+
+  .columnHeader {
+    font-size: 0.75rem;
+  }
+
+  .dot {
+    height: 8px;
+    width: 8px;
+  }
+
+  .column-head-div {
+    gap: 8px;
+  }
+
+  .column-div {
+    width: 100%;
+  }
+}
+
+/******** Mobile ********/
+@media screen and (max-width: 576px) {
+  .card-column-main {
+    grid-template-columns: minmax(
+      0,
+      380px
+    ); /* Stack columns in single column */
+  }
+
+  .column-div {
+    padding: 24px;
+  }
+
+  #header-board-name {
+    display: none; /* Hide board name on mobile */
+  }
+
+  .addnewtask-btn {
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #635fc7;
+    color: #fff;
+    border: none;
+    border-radius: 100px; /* Pill shape button */
+    height: 33px;
+    width: 33px;
+    padding: 10px 10px 12px 10px;
+    font-size: 0.938rem;
+    font-weight: 700;
+    cursor: pointer;
+    overflow: hidden; /* Prevents overflowed text/icons from showing */
+  }
+
+  .addnewtask-btn-text {
+    display: none; /* Hidden on smallscreens; shown on desktop */
+  }
+}
