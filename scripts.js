@@ -20,7 +20,7 @@ function saveTasks() {
 }
 
 // Render all tasks and update counts
-function updateCanban() {
+function updateCanban() 
   const todoDiv = document.getElementById("todo-tasks");
   const doingDiv = document.getElementById("doing-tasks");
   const doneDiv = document.getElementById("done-tasks");
