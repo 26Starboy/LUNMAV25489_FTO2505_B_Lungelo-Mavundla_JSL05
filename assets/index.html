@@ -102,3 +102,25 @@
       </div>
     </div>
   </body>
+  
+    <dialog id="task-modal">
+    <div class="modal-body">
+      <div class="modal-header">
+        <h3>Task</h3>
+        <button class="close-btn" onclick="closeModal()">x</button>
+      </div>
+      <div class="task-details">
+        <h4 class="Section-discription">Title</h4>
+        <input id="edit-task-title" type="text" />
+      </div>
+      <div class="task-details">
+        <h4 class="Section-discription">Description</h4>
+        <input id="edit-task-description" type="text" />
+      <div class="task-details">
+        <h4 class="Section-discription">Status</h4>
+        <select id="edit-task-status">
+          <option value="todo">Todo</option>
+          <option value="doing">Doing</option>
+          <option value="done">Done</option>
+        </select>
+      </div>
