@@ -1,126 +1,153 @@
 <!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;1,400&display=swap"
-			rel="stylesheet"/>
-		<link rel="stylesheet" href="./styles.css" />
-		<link
-			rel="icon"
-			type="image/png"
-			sizes="32x32"
-			href="./assets/favicon.svg"
-		/>
-		<title>Kanban Task Management</title>
-	</head>
+<html lang="en"><!-- Root element with language English -->
+  <head>
+    <meta charset="UTF-8" /><!-- Character encoding UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" /><!-- Responsive viewport -->
 
-	<body>
-		<!-- Navigation Sidebar: Contains the logo, navigation links for boards, and theme toggle. -->
-		<nav class="side-bar" id="side-bar-div">
-			<div id="side-logo-div">
-				<img id="logo" src="./assets/logo-light.svg" alt="logo-light" />
-			</div>
+    <!-- Google Fonts: Load 'Plus Jakarta Sans' font with weights -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;1,400&display=swap"
+      rel="stylesheet"
+    />
 
-			<div class="boards-nav-links-div" id="boards-nav-links-div">
-				<h4 id="headline-sidepanel">ALL BOARDS (1)</h4>
-				<button class="board-btn">Launch Career</button>
-			</div>
-		</nav>
+    <!-- Link to external CSS file for styles -->
+    <link rel="stylesheet" href="./styles.css" />
 
-		<!-- Main Layout: Header with board title, add task button, and main content area for task columns. -->
-		<div id="layout">
-			<header id="header" class="sticky-header">
-				<div class="header-name-div">
-					<img
-						src="./assets/favicon.svg"
-						alt="logo-mobile"
-						class="logo-mobile"
-					/>
-					<h2 class="header-board-name" id="header-board-name">
-						Launch Career
-					</h2>
-					<button id="addTaskBtn">
-						<span class="desktop-view-add-task-btn">+ Add New Task</span
-						><span class="mobile-view-add-task-btn">+</span>
-					</button>
-				</div>
-			</header>
+    <!-- Favicon: Small icon in browser tab -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/favicon.svg"
+    />
 
-			<div class="container">
-				<main class="card-column-main">
-					<!-- Task Columns: Display tasks grouped by status (TODO, DOING, DONE). -->
-					<div class="column-div" data-status="todo">
-						<div id="todo-head-div" class="column-head-div">
-							<span class="dot" id="todo-dot"></span>
-							<h4 id="todoText" class="columnHeader"></h4>
-						</div>
-						<!-- Tasks container for TODO -->
-						<div class="tasks-container" data-status="todo">
-							<!-- tasks will be dynamically added -->
-						</div>
-					</div>
-					<!-- DOING Column -->
-					<div class="column-div" data-status="doing">
-						<div id="doing-head-div" class="column-head-div">
-							<span class="dot" id="doing-dot"></span>
-							<h4 id="doingText" class="columnHeader"></h4>
-						</div>
-						<!-- Tasks container for DOING -->
-						<div class="tasks-container" data-status="doing">
-							<!-- tasks will be dynamically added -->
-						</div>
-					</div>
-					<!-- DONE Column -->
-					<div class="column-div" data-status="done">
-						<div id="done-head-div" class="column-head-div">
-							<span class="dot" id="done-dot"></span>
-							<h4 id="doneText" class="columnHeader"></h4>
-						</div>
-						<!-- Tasks container for DONE -->
-						<div class="tasks-container" data-status="done">
-							<!-- tasks will be dynamically added -->
-						</div>
-					</div>
-				</main>
-			</div>
-		</div>
+    <!-- Title shown in browser tab -->
+    <title>Kanban Task Management</title>
+  </head>
 
-		<!-- modal structure and the inputs -->
+  <body>
+    <!-- Navigation Sidebar -->
+    <nav class="side-bar" id="side-bar-div">
+      <div id="side-logo-div">
+        <!-- Logo image in sidebar -->
+        <img id="logo" src="./assets/logo-light.svg" alt="logo-light" />
+      </div>
 
-		<div id="modal" class="modal" style="display: none">
-			<!--hiding the modal from the page -->
-			<div id="modal-content" class="modal-content">
-				<button id="close-modal" class="close-btn">&times;</button>
-				<h1 id="modal-heading"></h1>
+      <div class="boards-nav-links-div" id="boards-nav-links-div">
+        <!-- Sidebar header showing number of boards -->
+        <h4 id="headline-sidepanel">ALL BOARDS (1)</h4>
 
-				<!-- all the inputs for the modal -->
+        <!-- Button for selecting the board -->
+        <button class="board-btn">Launch Career</button>
+      </div>
+    </nav>
 
-				<label>Title</label><br />
-				<input
-					type="text"
-					id="taskTitleInput"
-					required
-					placeholder="e.g. Take chilled break"
-				/><br /><br />
-				<label>Description</label><br />
-				<textarea
-					id="taskDescriptionInput"
-					rows="6"
-					placeholder="e.g Pet your dog, have a cup of coffee,dance to your favourite song and come back to crush this challenge."
-				></textarea
-				><br /><br />
+    <!-- Main Layout container -->
+    <div id="layout">
+      <!-- Header section with board title and add task button -->
+      <header id="header" class="sticky-header">
+        <div class="header-name-div">
+          <!-- Mobile version logo -->
+          <img
+            src="./assets/favicon.svg"
+            alt="logo-mobile"
+            class="logo-mobile"
+          />
 
-				<label>Status</label><br />
-				<select id="taskStatusInput">
-					<option value="doing">Doing</option>
-					<option value="done">Done</option>
-					<option value="todo">Todo</option></select
-				><br /><br />
-				<button id="saveTaskBtn" class="save-btn"></button>
-			</div>
-		</div>
-		<script type="module" src="scripts.js"></script>
-	</body>
+          <!-- Board name displayed in header -->
+          <h2 class="header-board-name" id="header-board-name">
+            Launch Career
+          </h2>
+
+          <!-- Add Task button with different views for desktop and mobile -->
+          <button id="addTaskBtn">
+            <span class="desktop-view-add-task-btn">+ Add New Task</span>
+            <span class="mobile-view-add-task-btn">+</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Container for task columns -->
+      <div class="container">
+        <main class="card-column-main">
+          <!-- TODO Column -->
+          <div class="column-div" data-status="todo">
+            <div id="todo-head-div" class="column-head-div">
+              <!-- Colored dot indicator -->
+              <span class="dot" id="todo-dot"></span>
+              <!-- Column header text with task count -->
+              <h4 id="todoText" class="columnHeader"></h4>
+            </div>
+
+            <!-- Container where TODO tasks will be dynamically inserted -->
+            <div class="tasks-container" data-status="todo"></div>
+          </div>
+
+          <!-- DOING Column -->
+          <div class="column-div" data-status="doing">
+            <div id="doing-head-div" class="column-head-div">
+              <span class="dot" id="doing-dot"></span>
+              <h4 id="doingText" class="columnHeader"></h4>
+            </div>
+            <!-- Container for DOING tasks -->
+            <div class="tasks-container" data-status="doing"></div>
+          </div>
+
+          <!-- DONE Column -->
+          <div class="column-div" data-status="done">
+            <div id="done-head-div" class="column-head-div">
+              <span class="dot" id="done-dot"></span>
+              <h4 id="doneText" class="columnHeader"></h4>
+            </div>
+            <!-- Container for DONE tasks -->
+            <div class="tasks-container" data-status="done"></div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- Modal for Adding or Editing Tasks -->
+    <div id="modal" class="modal" style="display: none"><!-- Hidden initially -->
+      <div id="modal-content" class="modal-content">
+        <!-- Close button for modal -->
+        <button id="close-modal" class="close-btn">&times;</button>
+
+        <!-- Modal heading changes dynamically -->
+        <h1 id="modal-heading"></h1>
+
+        <!-- Task Title Input -->
+        <label>Title</label><br />
+        <input
+          type="text"
+          id="taskTitleInput"
+          required
+          placeholder="e.g. Take chilled break"
+        /><br /><br />
+
+        <!-- Task Description Input -->
+        <label>Description</label><br />
+        <textarea
+          id="taskDescriptionInput"
+          rows="6"
+          placeholder="e.g Pet your dog, have a cup of coffee,dance to your favourite song and come back to crush this challenge."
+        ></textarea
+        ><br /><br />
+
+        <!-- Task Status Dropdown -->
+        <label>Status</label><br />
+        <select id="taskStatusInput">
+          <option value="doing">Doing</option>
+          <option value="done">Done</option>
+          <option value="todo">Todo</option>
+        </select
+        ><br /><br />
+
+        <!-- Save button to submit the modal form -->
+        <button id="saveTaskBtn" class="save-btn"></button>
+      </div>
+    </div>
+
+    <!-- Link to external JavaScript (module type) -->
+    <script type="module" src="scripts.js"></script>
+  </body>
 </html>
