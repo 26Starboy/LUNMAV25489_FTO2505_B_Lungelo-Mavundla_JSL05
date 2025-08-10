@@ -118,3 +118,22 @@ function addTask() {
   const title = document.getElementById("edit-task-title").value.trim();
   const description = document.getElementById("edit-task-description").value.trim();
   const status = document.getElementById("edit-task-status").value;
+
+  
+  if (!title) {
+    alert("Task title cannot be empty!");
+    return;
+  }
+
+  const newTask = {
+    id: Date.now(), // unique id
+    title,
+    description,
+    status
+  };
+
+  tasks.push(newTask);
+  saveTasks();
+  updateCanban();
+  closeModal();
+}
