@@ -53,3 +53,27 @@ function updateCanban()
   document.getElementById("toDoText").textContent = `TODO (${todoCount})`;
   document.getElementById("doingText").textContent = `DOING (${doingCount})`;
   document.getElementById("doneText").textContent = `DONE (${doneCount})`;
+
+  // Open modal for editing task by ID
+function openEditModal(id) {
+  currentTask = tasks.find(t => t.id === id);
+  if (!currentTask) return;
+
+  document.getElementById("edit-task-title").value = currentTask.title;
+  document.getElementById("edit-task-description").value = currentTask.description;
+  document.getElementById("edit-task-status").value = currentTask.status;
+
+  document.getElementById("task-modal").showModal();
+}
+
+// Close any open modal and reset currentTask
+function closeModal() {
+  const modal = document.getElementById("task-modal");
+  modal.close();
+  currentTask = null;
+
+  // Clear inputs
+  document.getElementById("edit-task-title").value = "";
+  document.getElementById("edit-task-description").value = "";
+  document.getElementById("edit-task-status").value = "todo";
+}
